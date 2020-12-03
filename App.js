@@ -3,11 +3,12 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./Login.js";
 import Signup from "./Signup.js";
+import Login2 from "./Login2.js";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Login/>
+      <Login2 />
       <StatusBar style="auto" />
     </View>
   );
@@ -16,7 +17,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#1C5063",
     alignItems: "center",
     justifyContent: "center",
   },

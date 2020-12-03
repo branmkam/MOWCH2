@@ -1,29 +1,30 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, TextInput, Button } from "react-native";
+import { fireAuth } from "./firebase";
 
 export default class Login extends Component {
-    constructor(){
-        super();
-        this.state = {
-            username: "",
-            password: "",
-        };
-        //state methods - none at the moment
-    }
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+    };
+    //state methods - none at the moment
+  }
 
   render() {
     return (
       <View id="login">
         <Text> MOWCH Logo Here </Text>
         <TextInput
-          id="login-username"
-          style={{ border: "black 2px solid", placeholder: "Username"}}
-          onChangeText = {(text) => this.setState({username : text})}
+          id="login-email"
+          style={{ border: "black 2px solid", placeholder: "email" }}
+          onChangeText={(text) => this.setState({ email: text })}
         />
         <TextInput
           id="login-password"
           style={{ border: "black 2px solid", placeholder: "Password" }}
-          onChangeText = {(text) => this.setState({password : text})}
+          onChangeText={(text) => this.setState({ password: text })}
         />
         <Text
           id="login-forgot"
@@ -34,7 +35,25 @@ export default class Login extends Component {
         <Button
           id="login-button"
           title="Log In"
-          onPress={() => 0} // pass in authentication method
+          onPress={(e) => {
+            e.preventDefault();
+            try {
+              fireAuth
+                .signInWithEmailAndPassword(
+                  this.state.email,
+                  this.state.password
+                )
+                .then((auth) => {
+                  if (auth) {
+                    // there is a user so navigate to home screen
+                    console.log("success");
+                  }
+                });
+            } catch (err) {
+              console.log(err.message);
+            }
+            // firebase log in here
+          }} // pass in authentication method
         />
         <Text id="login-donthave">Don't have an account?</Text>
         <Text
