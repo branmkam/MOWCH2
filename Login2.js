@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, TextInput, Button } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  SafeAreaView,
+} from "react-native";
 import { fireAuth } from "./firebase";
 import {
   useFonts,
@@ -7,8 +14,10 @@ import {
   Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat";
 import { AppLoading } from "expo";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function Login2() {
+export default function Login2({ navigation }) {
   const [email, setEmail] = useState(""); // the variable email will have whatever the user inputted
   const [password, setPassword] = useState(""); // the variable password will have whatever the user inputted
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,48 +37,50 @@ export default function Login2() {
   };
 
   return (
-    <View id="login" style={styles.container}>
+    <SafeAreaView id="login" style={styles.container}>
       <Text> MOWCH Logo Here </Text>
+      <View>
+        <TextInput
+          id="login-email"
+          style={styles.input_container}
+          onChangeText={(e) => setEmail(e)}
+          placeholder="Email"
+        />
 
-      <TextInput
-        id="login-email"
-        style={styles.input_container}
-        onChangeText={(e) => setEmail(e)}
-        placeholder="Email"
-      />
+        <TextInput
+          id="login-password"
+          style={styles.input_container}
+          onChangeText={(e) => setPassword(e)}
+          placeholder="Password"
+        />
 
-      <TextInput
-        id="login-password"
-        style={styles.input_container}
-        onChangeText={(e) => setPassword(e)}
-        placeholder="Password"
-      />
+        <Text style={styles.error_message}>{errorMessage}</Text>
 
-      <Text style={styles.error_message}>{errorMessage}</Text>
-
-      <Text id="login-forgot" style={styles.forgot_password}>
-        Forgot Password?
-      </Text>
-      <Button
-        id="login-button"
-        title="Log In"
-        color="#00B7C4"
-        onPress={logIn}
-        width="348px"
-        height="55px"
-      />
-
-      <Text id="login-donthave" style={styles.dont_have_account}>
-        Don't have an account?
-      </Text>
-      <Text
-        id="login-signuptext"
-        style={styles.sign_up_text}
-        onPress={() => 0} //set this as a pseudo-hyperlink to the Signup page
-      >
-        Sign Up
-      </Text>
-    </View>
+        <Text id="login-forgot" style={styles.forgot_password}>
+          Forgot Password?
+        </Text>
+        <Button
+          id="login-button"
+          title="Log In"
+          color="#00B7C4"
+          onPress={logIn}
+          width="100%"
+          height="100%"
+        />
+      </View>
+      <View>
+        <Text id="login-donthave" style={styles.dont_have_account}>
+          Don't have an account?
+        </Text>
+        <Text
+          id="login-signuptext"
+          style={styles.sign_up_text}
+          onPress={() => navigation.navigate("Signup")} //set this as a pseudo-hyperlink to the Signup page
+        >
+          Sign Up
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -77,27 +88,30 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 
   input_container: {
     fontFamily: Montserrat_400Regular,
     backgroundColor: "white",
-    fontSize: "140%",
-    width: "348px",
-    height: "55px",
+    fontSize: "120%",
+    width: "100%",
+    height: "100%",
     marginBottom: "2%",
     marginTop: "2%",
     borderRadius: "25px",
-    paddingLeft: "10px",
+    paddingLeft: "5%",
+    paddingTop: "2%",
+    paddingBottom: "2%",
   },
 
   login_button: {
     fontFamily: Montserrat_400Regular,
     backgroundColor: "white",
     fontSize: "140%",
-    width: "348px",
-    height: "55px",
+    width: "100%",
+    height: "100%",
     marginBottom: "1%",
     marginTop: "1%",
     borderRadius: "25px",
