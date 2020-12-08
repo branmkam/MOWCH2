@@ -33,6 +33,7 @@ export default function Signup2() {
             auth.user.updateProfile({
               displayName: name, // TODO: Replace with actual name they input
             });
+            navigation.navigate("Home");
           }
         })
         .catch((err) => setErrorMessage(err.message));

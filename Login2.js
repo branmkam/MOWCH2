@@ -30,6 +30,7 @@ export default function Login2({ navigation }) {
         if (auth) {
           // there is a user so navigate to home screen
           //console.log(auth.user);  WORKS
+          navigation.navigate("Home");
         }
       })
       .catch((err) => setErrorMessage(err.message)); // an error messsage that displays underneath
@@ -56,7 +57,11 @@ export default function Login2({ navigation }) {
 
         <Text style={styles.error_message}>{errorMessage}</Text>
 
-        <Text id="login-forgot" style={styles.forgot_password}>
+        <Text
+          id="login-forgot"
+          style={styles.forgot_password}
+          // TODO navigate to forgot password page
+        >
           Forgot Password?
         </Text>
         <Button
