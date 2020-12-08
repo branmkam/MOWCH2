@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import AddressHomePage from "./AddressHomePage";
 import { fireAuth } from "./firebase";
@@ -18,10 +19,10 @@ export default function Home({ navigation }) {
       >
         <Button title="Start" color="#C2D82F" width="100%" height="100%" />
       </View>
-      <View>
+      <ScrollView>
         <AddressHomePage address={"heyeywya\nhey".replace(/\\n/g, "\n")} />
         {/* replace that hey thing with the string */}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
