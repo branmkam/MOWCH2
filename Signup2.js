@@ -7,14 +7,14 @@ import {
   Button,
   SafeAreaView,
 } from "react-native";
-import { fireAuth } from "./firebase";
+import { fireAuth, fireDb } from "./firebase";
 import {
   useFonts,
   Montserrat_400Regular,
   Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat";
 
-export default function Signup2() {
+export default function Signup2({ navigation }) {
   const signUp = (e) => {
     if (password1 !== password2) {
       setErrorMessage("Please ensure both passwords are equal.");
@@ -33,6 +33,7 @@ export default function Signup2() {
             auth.user.updateProfile({
               displayName: name, // TODO: Replace with actual name they input
             });
+
             navigation.navigate("Home");
           }
         })
@@ -67,12 +68,14 @@ export default function Signup2() {
           style={styles.input_container}
           onChangeText={(e) => setPassword1(e)}
           placeholder="Password"
+          secureTextEntry={true}
         />
         <TextInput
           id="signup-retypepassword"
           style={styles.input_container}
           onChangeText={(e) => setPassword2(e)}
           placeholder="Retype Password"
+          secureTextEntry={true}
         />
         <Text style={styles.error_message}>{errorMessage}</Text>
       </View>

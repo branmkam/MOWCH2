@@ -53,6 +53,7 @@ export default function Login2({ navigation }) {
           style={styles.input_container}
           onChangeText={(e) => setPassword(e)}
           placeholder="Password"
+          secureTextEntry={true}
         />
 
         <Text style={styles.error_message}>{errorMessage}</Text>

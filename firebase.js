@@ -17,6 +17,10 @@ try {
 } catch (err) {}
 
 const fireDb = mowch.database();
+// route number
+// admin
+// headadmin
+
 const fireAuth = firebase.auth();
 
 export { fireDb, fireAuth };

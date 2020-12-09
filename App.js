@@ -25,19 +25,6 @@ export default function App() {
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator style={styles.container}>
         <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerStyle: {
-              backgroundColor: "#1C5063",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-          }}
-        />
-        <Stack.Screen
           name="Login"
           component={Login2}
           options={{
@@ -53,6 +40,19 @@ export default function App() {
         <Stack.Screen
           name="Signup"
           component={Signup2}
+          options={{
+            headerStyle: {
+              backgroundColor: "#1C5063",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
           options={{
             headerStyle: {
               backgroundColor: "#1C5063",
