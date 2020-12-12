@@ -6,6 +6,7 @@ import Signup2 from "./Signup2.js";
 import Login2 from "./Login2.js";
 import Home from "./Home.js";
 import ListOfDrivers from "./ListofDrivers.js";
+import ForgotPassword from "./ForgotPassword.js";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -67,6 +68,19 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{
+            headerStyle: {
+              backgroundColor: "#1C5063",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
           options={{
             headerStyle: {
               backgroundColor: "#1C5063",
