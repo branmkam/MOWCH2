@@ -33,7 +33,12 @@ export default function Signup2({ navigation }) {
             auth.user.updateProfile({
               displayName: name, // TODO: Replace with actual name they input
             });
-
+            fireDb.ref("users/" + auth.user.uid).set({
+              route: "none",
+              admin: true,
+              headadmin: true,
+              name: name,
+            });
             navigation.navigate("Home");
           }
         })

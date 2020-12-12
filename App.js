@@ -5,6 +5,7 @@ import Login from "./Login.js";
 import Signup2 from "./Signup2.js";
 import Login2 from "./Login2.js";
 import Home from "./Home.js";
+import ListOfDrivers from "./ListofDrivers.js";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -24,6 +25,19 @@ export default function App() {
   return (
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator style={styles.container}>
+        <Stack.Screen
+          name="Assign Route"
+          component={ListOfDrivers}
+          options={{
+            headerStyle: {
+              backgroundColor: "#1C5063",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
         <Stack.Screen
           name="Login"
           component={Login2}

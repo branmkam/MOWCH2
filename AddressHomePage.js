@@ -1,10 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import {
-  useFonts,
-  Montserrat_400Regular,
-  Montserrat_700Bold,
-} from "@expo-google-fonts/montserrat";
+import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 
 export default function AddressHomePage(props) {
   return (
