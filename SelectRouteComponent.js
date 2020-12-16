@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 
-export default function SelectRouteComponent() {
+export default function SelectRouteComponent({ navigation, route }) {
   return (
     <View style={styles.main_container}>
       <View>
