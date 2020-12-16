@@ -8,29 +8,25 @@ import {
   Text,
   TouchableHighlight,
 } from "react-native";
-import getAllDrivers from "./getAllDrivers.js";
 import AdminListComponent from "./AdminListComponent.js";
+import { fireDb } from "./firebase";
+import getAllDrivers from "./getAllDrivers.js";
 
-export default function ListOfDrivers() {
-  // use UseEffect to use an async await function to get the snapshot of the database in an array
+export default function SelectRoute() {
   const [data, setData] = useState([]);
-  // DATA is just for testing purposes, will replace with actual data from database
+
   useEffect(() => {
     async function fetchInfo() {
       let response = await getAllDrivers();
       let responseValues = Object.values(response); // turn into an array
-      setData(responseValues);
+      let mappedNames = responseValues.map((item) => item.name);
+      setData(mappedNames);
     }
-    fetchInfo();
-  }, []);
 
-  const renderItem = ({ item }) => (
-    <AdminListComponent
-      driver={item.name}
-      route={item.route}
-      isRoute={item.route !== "none"}
-    />
-  );
+    fetchInfo();
+  });
+
+  const renderItem = ({ item }) => <Text>{item}</Text>;
   return (
     <SafeAreaView style={styles.container}>
       <FlatList data={data} renderItem={renderItem} />
@@ -38,9 +34,4 @@ export default function ListOfDrivers() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-  },
-});
+const styles = StyleSheet.create({});

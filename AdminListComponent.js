@@ -1,30 +1,32 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-import {
-  Montserrat_700Bold,
-  Montserrat_400Regular,
-} from "@expo-google-fonts/montserrat";
+import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { useNavigation } from "@react-navigation/native";
 
-export default function AdminListComponent(props) {
+export default function AdminListComponent({ driver, route, isRoute, id }) {
   // props need to be driver, route, isRoute
+  const navigation = useNavigation();
+  const navigateToSelectRoute = (e) => {
+    navigation.navigate("Select Route", { selectedDriver: driver });
+  };
   return (
     <View style={styles.main_container}>
       <View>
         <View style={styles.driver_container}>
           <FontAwesomeIcon icon={faUser} size={25} />
-          {props.isRoute ? (
-            <Text style={styles.input_container_has_route}>{props.driver}</Text>
+          {isRoute ? (
+            <Text style={styles.input_container_has_route}>{driver}</Text>
           ) : (
-            <Text style={styles.input_container}>{props.driver}</Text>
+            <Text style={styles.input_container}>{driver}</Text>
           )}
         </View>
 
-        {props.isRoute ? (
+        {isRoute ? (
           <View style={styles.driver_container}>
             <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
-            <Text style={styles.route_text}>{props.route}</Text>
+            <Text style={styles.route_text}>{route}</Text>
           </View>
         ) : (
           <View style={styles.driver_container}>
@@ -32,7 +34,11 @@ export default function AdminListComponent(props) {
           </View>
         )}
         <View style={{ paddingTop: "10%" }}>
-          <Button title="Assign New Route" color="#3DD82F"></Button>
+          <Button
+            title="Assign New Route"
+            color="#3DD82F"
+            onPress={navigateToSelectRoute}
+          ></Button>
         </View>
       </View>
     </View>
