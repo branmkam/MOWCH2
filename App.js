@@ -24,12 +24,23 @@ const MyTheme = {
   },
 };
 
-
 export default function App() {
   return (
-  
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator style={styles.container}>
+        <Stack.Screen
+          name="Signup"
+          component={TokenDisplay}
+          options={{
+            headerStyle: {
+              backgroundColor: "#1C5063",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
         <Stack.Screen
           name="Assign Route"
           component={TokenDisplay} //change back to drivers once testing is done
@@ -56,19 +67,7 @@ export default function App() {
             },
           }}
         />
-        <Stack.Screen
-          name="Signup"
-          component={Signup2}
-          options={{
-            headerStyle: {
-              backgroundColor: "#1C5063",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-          }}
-        />
+
         <Stack.Screen
           name="Home"
           component={Home}

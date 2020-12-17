@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableHighlight,
+} from "react-native";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
@@ -35,7 +41,10 @@ export default function AdminListComponent({
         </View>
         {isRoute ? (
           <View style={styles.driver_container}>
-            <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
+            <TouchableHighlight>
+              <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
+            </TouchableHighlight>
+
             <Text style={styles.route_text}>{route}</Text>
           </View>
         ) : (

@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import getToken from "./getToken.js";
+import getTokenFromDb from "./getTokenFromDb.js";
 import AdminListComponent from "./AdminListComponent.js";
 
 export default function TokenDisplay() {
@@ -19,17 +20,16 @@ export default function TokenDisplay() {
     async function fetchInfo() {
       let response = await getToken();
       //let responseValues = Object.values(response); // turn into an array
+      console.log(response);
       setData(response);
     }
     fetchInfo();
   }, []);
 
-  const renderItem = ({ item }) => (
-    <Text>{item}</Text>
-  );
+  const renderItem = ({ item }) => <Text>{item}</Text>;
   return (
     <SafeAreaView style={styles.container}>
-       <Text>{"Data: " + data}</Text>
+      <Text>{"Data: " + data}</Text>
     </SafeAreaView>
   );
 }
