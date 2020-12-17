@@ -46,11 +46,11 @@ export default class Login extends Component {
                 .then((auth) => {
                   if (auth) {
                     // there is a user so navigate to home screen
-                    console.log("success");
+                    // console.log("success");
                   }
                 });
             } catch (err) {
-              console.log(err.message);
+              //console.log(err.message);
             }
             // firebase log in here
           }} // pass in authentication method
