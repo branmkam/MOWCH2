@@ -1,43 +1,62 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faMap } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
+import { fireDb } from "./firebase";
 
-export default function SelectRouteComponent({ navigation, route }) {
+export default function SelectRouteComponent({
+  routeName,
+  routeId,
+  selectedDriver,
+  update,
+  setUpdate,
+}) {
+  const navigation = useNavigation();
+  const clickHandler = () => {
+    fireDb.ref("users/").child(`${selectedDriver}`).update({
+      route: routeName,
+    });
+    let h = update;
+    setUpdate(!h); // updates state
+    navigation.goBack();
+  };
   return (
-    <View style={styles.main_container}>
+    <TouchableOpacity style={styles.main_container} onPress={clickHandler}>
       <View>
         <View style={styles.driver_container}>
-          <FontAwesomeIcon icon={faUser} size={25} />
-          {isRoute ? (
-            <Text style={styles.input_container_has_route}>{driver}</Text>
-          ) : (
-            <Text style={styles.input_container}>{driver}</Text>
-          )}
-        </View>
-
-        {isRoute ? (
-          <View style={styles.driver_container}>
-            <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
-            <Text style={styles.route_text}>{route}</Text>
-          </View>
-        ) : (
-          <View style={styles.driver_container}>
-            <Text style={styles.no_route_text}>No Route Assigned</Text>
-          </View>
-        )}
-        <View style={{ paddingTop: "10%" }}>
-          <Button
-            title="Assign New Route"
-            color="#3DD82F"
-            onPress={navigateToSelectRoute}
-          ></Button>
+          <FontAwesomeIcon icon={faMap} size={25} />
+          <Text style={styles.input_container_has_route}>{routeName}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  main_container: {
+    display: "flex",
+    backgroundColor: "white",
+    borderRadius: "25px",
+    paddingTop: "2%",
+    paddingBottom: "2%",
+    marginBottom: "2%",
+    textAlign: "center",
+  },
+  driver_container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  input_container_has_route: {
+    fontFamily: Montserrat_400Regular,
+    color: "#00B7D0",
+    fontSize: "120%",
+    paddingLeft: "3%",
+    fontWeight: "bold",
+    weight: "100%",
+  },
+});

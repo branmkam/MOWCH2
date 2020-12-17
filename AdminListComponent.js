@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 
-export default function AdminListComponent({ driver, route, isRoute, id }) {
+export default function AdminListComponent({
+  driver,
+  route,
+  isRoute,
+  id,
+  update,
+  setUpdate,
+}) {
   // props need to be driver, route, isRoute
   const navigation = useNavigation();
   const navigateToSelectRoute = (e) => {
-    navigation.navigate("Select Route", { selectedDriver: driver });
+    navigation.navigate("Select Route", {
+      selectedDriver: id,
+      setUpdate: setUpdate,
+      update: update,
+    });
   };
   return (
     <View style={styles.main_container}>
@@ -22,7 +33,6 @@ export default function AdminListComponent({ driver, route, isRoute, id }) {
             <Text style={styles.input_container}>{driver}</Text>
           )}
         </View>
-
         {isRoute ? (
           <View style={styles.driver_container}>
             <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
