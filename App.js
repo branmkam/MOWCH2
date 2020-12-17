@@ -6,6 +6,7 @@ import Signup2 from "./Signup2.js";
 import Login2 from "./Login2.js";
 import Home from "./Home.js";
 import ListOfDrivers from "./ListofDrivers.js";
+import ListOfRecords from "./ListofRecords.js"
 import TokenDisplay from "./TokenDisplay.js";
 import ForgotPassword from "./ForgotPassword.js";
 import SelectRoute from "./SelectRoute.js";
@@ -30,7 +31,7 @@ export default function App() {
       <Stack.Navigator style={styles.container}>
         <Stack.Screen
           name="Signup"
-          component={TokenDisplay}
+          component={ListOfRecords}
           options={{
             headerStyle: {
               backgroundColor: "#1C5063",
