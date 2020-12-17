@@ -8,7 +8,7 @@ import {
   Text,
   TouchableHighlight,
 } from "react-native";
-import getAllRoutes from "./getToken.js";
+import getToken from "./getToken.js";
 import AdminListComponent from "./AdminListComponent.js";
 
 export default function TokenDisplay() {
@@ -17,7 +17,7 @@ export default function TokenDisplay() {
   // DATA is just for testing purposes, will replace with actual data from database
   useEffect(() => {
     async function fetchInfo() {
-      let response = await getAllRoutes();
+      let response = await getToken();
       //let responseValues = Object.values(response); // turn into an array
       setData(response);
     }
