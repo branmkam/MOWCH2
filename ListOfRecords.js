@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import getRecords from "./getRecords.js";
 import AdminListComponent from "./AdminListComponent.js";
+import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 
 export default function ListOfRecords() {
   // use UseEffect to use an async await function to get the snapshot of the database in an array
@@ -27,22 +28,74 @@ export default function ListOfRecords() {
     // TODO: this doesn't update the first time you change it, but it does change after every other time you assign a driver
   }, [update]);
 
-  let t = "";
-  for(let i = 0; i < data.length; i++)
-  {
-    t += data[i].fieldData.Name_First + ":\t\t" + data[i].recordId + "\n"
-  }
+  //---------------made flatlist version--------
+  // let t = "";
+  // for(let i = 0; i < data.length; i++)
+  // {
+  //   t += "     " + data[i].fieldData.RouteName_c + "/" + data[i].fieldData.ID + "\n"
+  //   t += getAddresses(data[i]);
+  // }
 
+  const renderItem = ({ item }) => (
+    <View>
+      <Text style={styles.routeName}>{item.fieldData.RouteName_c}</Text>
+      <Text style={styles.addresses}>{getAddresses(item)}</Text>
+    </View>
+  );
   return (
     <SafeAreaView style={styles.container}>
-        <Text>{t}</Text>
+      <Text>ROUTE IN QUESTION</Text>
+      <Text>{findRoute(data, false, 5)}</Text>
+      <FlatList data={data} renderItem={renderItem} />
     </SafeAreaView>
   );
 }
 
+
+//stylesheet
 const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
   },
+  routeName: {
+    fontFamily: Montserrat_400Regular,
+    color: "white",
+    textAlign: "center",
+    fontSize: "36px"
+  },
+  addresses: {
+    fontFamily: Montserrat_400Regular,
+    color: "#3DD82F",
+    textAlign: "center",
+  },
 });
+
+
+//functions
+function getAddresses(route)
+{
+  let t = "";
+  for(let j = 0; j < route.portalData["rte.RCP_Recipients"].length; j++)
+    {
+      var obj = route.portalData["rte.RCP_Recipients"][j];
+      var rte = "rte.RCP_Recipients::";
+      t += "\t" + obj[rte + "Name_First"] + " " + obj[rte + "Name_Last"] + " | " + 
+      obj[rte + "Address_Street1"] + ( obj[rte + "Address_Street2"].length == 0 ? "" : ", ") + 
+      obj[rte + "Address_Street2"] + ", " + obj[rte + "Address_City"] + ", NC\n";
+    }
+    return t;
+}
+
+function findRoute(data, city, num)
+{
+  let route = null;
+  let routeName = (city ? "Chapel Hill" : "Hillsborough") + "-" + num;
+
+  for(let i = 0; i < data.length; i++)
+  {
+    route = (data[i].fieldData.RouteName_c.toLowerCase() == routeName.toLowerCase()) ? data[i] : null;
+    if(route != null) {break};
+  }
+  return routeName + ": \n" + (route == null ? "Route not found" : getAddresses(route));
+}
