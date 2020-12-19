@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import getAllDrivers from "./getAllDrivers.js";
-import AdminListComponent from "./AdminListComponent.js";
+import AdminDriverList from "./AdminDriverList.js";
 
 export default function ListOfDrivers() {
   // use UseEffect to use an async await function to get the snapshot of the database in an array
@@ -27,7 +27,7 @@ export default function ListOfDrivers() {
   }, [update]);
 
   const renderItem = ({ item }) => (
-    <AdminListComponent
+    <AdminDriverList
       driver={item[1].name}
       route={item[1].route}
       isRoute={item[1].route !== "none"}

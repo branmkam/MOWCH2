@@ -11,59 +11,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 
-export default function AdminListComponent({
-  driver,
-  route,
-  isRoute,
-  id,
-  update,
-  setUpdate,
-}) {
-  // props need to be driver, route, isRoute
-  const navigation = useNavigation();
-  const navigateToSelectRoute = (e) => {
-    navigation.navigate("Select Route", {
-      selectedDriver: id,
-      setUpdate: setUpdate,
-      update: update,
-    });
-  };
+export default function AdminRouteList(routeName, addresses) {
   return (
     <View style={styles.main_container}>
-      <View>
-        <View style={styles.driver_container}>
-          <FontAwesomeIcon icon={faUser} size={25} />
-          {isRoute ? (
-            <Text style={styles.input_container_has_route}>{driver}</Text>
-          ) : (
-            <Text style={styles.input_container}>{driver}</Text>
-          )}
-        </View>
-        {isRoute ? (
-          <View style={styles.driver_container}>
-            <TouchableHighlight>
-              <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
-            </TouchableHighlight>
-
-            <Text style={styles.route_text}>{route}</Text>
-          </View>
-        ) : (
-          <View style={styles.driver_container}>
-            <Text style={styles.no_route_text}>No Route Assigned</Text>
-          </View>
-        )}
-        <View style={{ paddingTop: "10%" }}>
-          <Button
-            title="Assign New Route"
-            color="#3DD82F"
-            onPress={navigateToSelectRoute}
-          ></Button>
-        </View>
-      </View>
+      <Text>{routeName}</Text>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   main_container: {
     display: "flex",
