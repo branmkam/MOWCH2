@@ -43,8 +43,8 @@ export default function SelectRoute({ navigation, route }) {
       routeName={item.route}
       routeId={item.routeId}
       selectedDriver={route.params?.selectedDriver}
-      update={route.params?.update}
-      setUpdate={route.params?.setUpdate}
+      setStateR={route.params?.setThisIsRoute}
+      setAssignedRoute={route.params?.assignedRoute}
     />
   );
   return (

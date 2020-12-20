@@ -31,8 +31,8 @@ export default function App() {
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator style={styles.container}>
         <Stack.Screen
-          name="ListofRoutes"
-          component={ListOfRecords}
+          name="Assign Route"
+          component={ListOfDrivers} //change back to drivers once testing is done
           options={{
             headerStyle: {
               backgroundColor: "#1C5063",
@@ -59,19 +59,6 @@ export default function App() {
         <Stack.Screen
           name="Signup"
           component={Signup2}
-          options={{
-            headerStyle: {
-              backgroundColor: "#1C5063",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Assign Route"
-          component={TokenDisplay} //change back to drivers once testing is done
           options={{
             headerStyle: {
               backgroundColor: "#1C5063",

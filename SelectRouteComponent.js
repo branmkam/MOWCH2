@@ -10,16 +10,18 @@ export default function SelectRouteComponent({
   routeName,
   routeId,
   selectedDriver,
-  update,
-  setUpdate,
+  setStateR,
+  setAssignedRoute,
 }) {
   const navigation = useNavigation();
   const clickHandler = () => {
     fireDb.ref("users/").child(`${selectedDriver}`).update({
       route: routeName,
     });
-    let h = update;
-    setUpdate(!h); // updates state
+    setStateR(true);
+    setAssignedRoute(routeName);
+    //let h = update;
+    //setUpdate(!h); // updates state
     navigation.goBack();
   };
   return (
