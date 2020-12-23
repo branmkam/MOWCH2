@@ -9,6 +9,7 @@ import { fireDb } from "./firebase";
 export default function SelectRouteComponent({
   routeName,
   routeId,
+  addresses,
   selectedDriver,
   setStateR,
   setAssignedRoute,
@@ -17,6 +18,7 @@ export default function SelectRouteComponent({
   const clickHandler = () => {
     fireDb.ref("users/").child(`${selectedDriver}`).update({
       route: routeName,
+      routeId: routeId,
     });
     setStateR(true);
     setAssignedRoute(routeName);
@@ -30,6 +32,9 @@ export default function SelectRouteComponent({
         <View style={styles.driver_container}>
           <FontAwesomeIcon icon={faMap} size={25} />
           <Text style={styles.input_container_has_route}>{routeName}</Text>
+        </View>
+        <View style={styles.addresses}>
+          <Text>{addresses}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -60,5 +65,14 @@ const styles = StyleSheet.create({
     paddingLeft: "3%",
     fontWeight: "bold",
     weight: "100%",
+  },
+  addresses: {
+    fontFamily: Montserrat_400Regular,
+    color: "black",
+    textAlign: "center",
+    fontSize: "11px",
+    fontStyle: "italic",
+    paddingBottom: "1%",
+    paddingTop: "2%",
   },
 });

@@ -20,7 +20,6 @@ export default function TokenDisplay() {
     async function fetchInfo() {
       let response = await getToken();
       //let responseValues = Object.values(response); // turn into an array
-      console.log(response);
       setData(response);
     }
     fetchInfo();

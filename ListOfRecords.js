@@ -1,22 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  ScrollView,
-  Modal,
-  Button,
-  View,
-  Text,
-  TouchableHighlight,
-} from "react-native";
+import { StyleSheet, SafeAreaView, FlatList } from "react-native";
 import getRecords from "./getRecords.js";
-import AdminDriverList from "./AdminDriverList.js";
 import getAllDrivers from "./getAllDrivers.js";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faMap, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
-import { useNavigation } from "@react-navigation/native";
-
 import AdminRouteList from "./AdminRouteList.js";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 
@@ -26,22 +11,20 @@ export default function ListOfRecords() {
   const [update, setUpdate] = useState(true);
   const [drivers, setDrivers] = useState([]);
   const [routesAssigned, setRoutesAssigned] = useState([]);
+  const [hasRoute, setHasRoute] = useState(false);
   // DATA is just for testing purposes, will replace with actual data from database
   useEffect(() => {
     async function fetchInfo() {
       let response = await getRecords();
-      let responseValues = Object.values(response); // turn into an array
-      console.log(responseValues);
       let response2 = await getAllDrivers();
-      let responseValues2 = Object.values(response2);
-      let allRoutesAssigned = responseValues2.map((driver) => driver[1].route);
-      setData(responseValues);
-      setRoutesAssigned(allRoutesAssigned);
-      setDrivers(responseValues2);
+      setData(response);
+      setRoutesAssigned(response2.map((driver) => driver[1].route));
+
+      setDrivers(response2);
     }
     fetchInfo();
     // TODO: this doesn't update the first time you change it, but it does change after every other time you assign a driver
-  }, [update]);
+  }, []);
 
   //---------------made flatlist version--------
   // let t = "";
@@ -66,47 +49,31 @@ export default function ListOfRecords() {
     </SafeAreaView>
   );
 */
-
   const renderItem = ({ item }) => (
-    <View style={styles.main_container}>
-      <View style={styles.driver_container}>
-        <FontAwesomeIcon icon={faMap} size={25} />
-        {routesAssigned.includes(item.fieldData.RouteName_c) ? (
-          <Text style={styles.input_container_has_route}>
-            {item.fieldData.RouteName_c}
-          </Text>
-        ) : (
-          <Text style={styles.input_container}>
-            {item.fieldData.RouteName_c}
-          </Text>
-        )}
-      </View>
-      <ScrollView maxHeight="1px">
-        <Text style={styles.addresses}>{getFourAddresses(item)}</Text>
-      </ScrollView>
-
-      {routesAssigned.includes(item.fieldData.RouteName_c) ? (
-        <View style={styles.driver_container}>
-          <TouchableHighlight>
-            <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
-          </TouchableHighlight>
-          <Text style={styles.route_text}>
-            {String(
+    <AdminRouteList
+      routeName={item.fieldData.RouteName_c}
+      routeId={item.fieldData.ID}
+      isDriver={routesAssigned.includes(item.fieldData.RouteName_c)}
+      driver={
+        drivers.find((driver) => driver[1].route == item.fieldData.RouteName_c)
+          ? String(
               drivers.find(
                 (driver) => driver[1].route == item.fieldData.RouteName_c
               )[1].name
-            )}
-          </Text>
-        </View>
-      ) : (
-        <View style={styles.driver_container}>
-          <Text style={styles.no_route_text}>No Driver Assigned</Text>
-        </View>
-      )}
-      <View style={{ paddingTop: "1%", display: "flex", alignItems: "center" }}>
-        <Button title="Assign New Driver" color="#3DD82F"></Button>
-      </View>
-    </View>
+            )
+          : "undefined"
+      }
+      driverId={
+        drivers.find((driver) => driver[1].route == item.fieldData.RouteName_c)
+          ? String(
+              drivers.find(
+                (driver) => driver[1].route == item.fieldData.RouteName_c
+              )[0]
+            )
+          : "undefined"
+      }
+      addresses={getFourAddresses(item)}
+    />
   );
   return (
     <SafeAreaView style={styles.container}>

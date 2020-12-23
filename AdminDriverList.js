@@ -30,6 +30,7 @@ export default function AdminDriverList({ driver, route, isRoute, id }) {
     setAssignedRoute("none");
     fireDb.ref("users/").child(`${id}`).update({
       route: "none",
+      routeId: -1,
     });
   };
   return (
