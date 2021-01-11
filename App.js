@@ -11,6 +11,7 @@ import ListOfRoutes from "./ListofRoutes.js";
 import TokenDisplay from "./TokenDisplay.js";
 import ForgotPassword from "./ForgotPassword.js";
 import SelectRoute from "./SelectRoute.js";
+import SelectDriver from "./SelectDriver.js";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -100,6 +101,19 @@ export default function App() {
         <Stack.Screen
           name="Select Route"
           component={SelectRoute}
+          options={{
+            headerStyle: {
+              backgroundColor: "#1C5063",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Select Driver"
+          component={SelectDriver}
           options={{
             headerStyle: {
               backgroundColor: "#1C5063",

@@ -11,6 +11,7 @@ import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMap, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { fireDb } from "./firebase";
+import { useNavigation } from "@react-navigation/native";
 
 export default function AdminRouteList({
   routeName,
@@ -20,6 +21,7 @@ export default function AdminRouteList({
   driverId,
   addresses,
 }) {
+  const navigation = useNavigation();
   const [stateDriver, setStateDriver] = useState(isDriver);
   const [assignedDriver, setAssignedDriver] = useState(driver);
   useEffect(() => {
@@ -33,6 +35,15 @@ export default function AdminRouteList({
     fireDb.ref("users/").child(`${driverId}`).update({
       route: "none",
       routeId: -1,
+    });
+  };
+
+  const navigateToSelectDriver = (e) => {
+    navigation.navigate("Select Driver", {
+      selectedRouteId: routeId,
+      selectedRouteName: routeName,
+      setThisIsDriver: setStateDriver,
+      assignedDriver: setAssignedDriver,
     });
   };
   return (
@@ -61,7 +72,11 @@ export default function AdminRouteList({
         </View>
       )}
       <View style={{ paddingTop: "1%", display: "flex", alignItems: "center" }}>
-        <Button title="Assign New Driver" color="#3DD82F"></Button>
+        <Button
+          title="Assign New Driver"
+          color="#3DD82F"
+          onPress={navigateToSelectDriver}
+        ></Button>
       </View>
     </View>
   );
