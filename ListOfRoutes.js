@@ -12,6 +12,8 @@ import AdminRouteList from "./AdminRouteList.js";
 import getRecords from "./getRecords.js";
 import getAllDrivers from "./getAllDrivers.js";
 
+// UNUSED THE CORRECT ONE IS LIST OF RECORDS
+
 export default function ListOfRoutes() {
   const [data, setData] = useState([]);
   const [drivers, setDrivers] = useState([]);

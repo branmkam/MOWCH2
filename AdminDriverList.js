@@ -20,6 +20,7 @@ export default function AdminDriverList({ driver, route, isRoute, id }) {
   const navigateToSelectRoute = (e) => {
     navigation.navigate("Select Route", {
       selectedDriver: id,
+      selectedDriverName: driver,
       setThisIsRoute: setStateRoute,
       assignedRoute: setAssignedRoute,
     });

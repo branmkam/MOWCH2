@@ -7,13 +7,12 @@ import Login2 from "./Login2.js";
 import Home from "./Home.js";
 import ListOfDrivers from "./ListofDrivers.js";
 import ListOfRecords from "./ListofRecords.js";
-import ListOfRoutes from "./ListofRoutes.js";
-import TokenDisplay from "./TokenDisplay.js";
 import ForgotPassword from "./ForgotPassword.js";
 import SelectRoute from "./SelectRoute.js";
 import SelectDriver from "./SelectDriver.js";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import Contact from "./Contact.js";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +30,19 @@ export default function App() {
   return (
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator style={styles.container}>
+        <Stack.Screen
+          name="Contact"
+          component={Contact}
+          options={{
+            headerStyle: {
+              backgroundColor: "#1C5063",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
         <Stack.Screen
           name="Assign Driver"
           component={ListOfRecords}

@@ -35,7 +35,7 @@ export default function SelectDriver({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.input_container_has_route}>
-        Assign this route to which driver?
+        Assign {route.params?.selectedRouteName} to which driver?
       </Text>
       {console.log(data)}
       <FlatList data={data} renderItem={renderItem} />
