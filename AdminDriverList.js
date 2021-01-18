@@ -10,22 +10,28 @@ import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
+import { fireDb } from "./firebase";
 
-export default function AdminListComponent({
-  driver,
-  route,
-  isRoute,
-  id,
-  update,
-  setUpdate,
-}) {
+export default function AdminDriverList({ driver, route, isRoute, id }) {
   // props need to be driver, route, isRoute
   const navigation = useNavigation();
+  const [stateRoute, setStateRoute] = useState(isRoute);
+  const [assignedRoute, setAssignedRoute] = useState(route);
   const navigateToSelectRoute = (e) => {
     navigation.navigate("Select Route", {
       selectedDriver: id,
-      setUpdate: setUpdate,
-      update: update,
+      selectedDriverName: driver,
+      setThisIsRoute: setStateRoute,
+      assignedRoute: setAssignedRoute,
+    });
+  };
+
+  const removeRouteHandler = (e) => {
+    setStateRoute(false);
+    setAssignedRoute("none");
+    fireDb.ref("users/").child(`${id}`).update({
+      route: "none",
+      routeId: -1,
     });
   };
   return (
@@ -33,19 +39,19 @@ export default function AdminListComponent({
       <View>
         <View style={styles.driver_container}>
           <FontAwesomeIcon icon={faUser} size={25} />
-          {isRoute ? (
+          {stateRoute ? (
             <Text style={styles.input_container_has_route}>{driver}</Text>
           ) : (
             <Text style={styles.input_container}>{driver}</Text>
           )}
         </View>
-        {isRoute ? (
+        {stateRoute ? (
           <View style={styles.driver_container}>
-            <TouchableHighlight>
+            <TouchableHighlight onPress={removeRouteHandler}>
               <FontAwesomeIcon icon={faMinusCircle} size={25} color="red" />
             </TouchableHighlight>
 
-            <Text style={styles.route_text}>{route}</Text>
+            <Text style={styles.route_text}>{assignedRoute}</Text>
           </View>
         ) : (
           <View style={styles.driver_container}>

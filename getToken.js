@@ -30,6 +30,5 @@ export default async function getToken() {
   fireDb.ref("env/").set({
     token: response.data.response.token,
   });
-  console.log(response.data.response.token);
   return response.data.response.token;
 }

@@ -6,13 +6,15 @@ import { faMap } from "@fortawesome/free-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 import { fireDb } from "./firebase";
 
-export default function SelectRouteComponent({
+export default function SelectDriverComponent({
   routeName,
   routeId,
-  addresses,
-  selectedDriver,
+  driver,
+  route,
+  isRoute,
   setStateR,
-  setAssignedRoute,
+  setAssignedDriver,
+  selectedDriver,
 }) {
   const navigation = useNavigation();
   const clickHandler = () => {
@@ -21,7 +23,7 @@ export default function SelectRouteComponent({
       routeId: routeId,
     });
     setStateR(true);
-    setAssignedRoute(routeName);
+    setAssignedDriver(driver);
     //let h = update;
     //setUpdate(!h); // updates state
     navigation.goBack();
@@ -31,10 +33,8 @@ export default function SelectRouteComponent({
       <View>
         <View style={styles.driver_container}>
           <FontAwesomeIcon icon={faMap} size={25} />
-          <Text style={styles.input_container_has_route}>{routeName}</Text>
-        </View>
-        <View style={styles.addresses}>
-          <Text>{addresses}</Text>
+
+          <Text style={styles.input_container_has_no_route}>{driver}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -61,6 +61,15 @@ const styles = StyleSheet.create({
   input_container_has_route: {
     fontFamily: Montserrat_400Regular,
     color: "#00B7D0",
+    fontSize: "120%",
+    paddingLeft: "3%",
+    fontWeight: "bold",
+    weight: "100%",
+  },
+
+  input_container_has_no_route: {
+    fontFamily: Montserrat_400Regular,
+    color: "black",
     fontSize: "120%",
     paddingLeft: "3%",
     fontWeight: "bold",

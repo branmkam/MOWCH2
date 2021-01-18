@@ -9,12 +9,11 @@ import {
   TouchableHighlight,
 } from "react-native";
 import getAllDrivers from "./getAllDrivers.js";
-import AdminListComponent from "./AdminListComponent.js";
+import AdminDriverList from "./AdminDriverList.js";
 
 export default function ListOfDrivers() {
   // use UseEffect to use an async await function to get the snapshot of the database in an array
   const [data, setData] = useState([]);
-  const [update, setUpdate] = useState(true);
   // DATA is just for testing purposes, will replace with actual data from database
   useEffect(() => {
     async function fetchInfo() {
@@ -24,16 +23,14 @@ export default function ListOfDrivers() {
     }
     fetchInfo();
     // TODO: this doesn't update the first time you change it, but it does change after every other time you assign a driver
-  }, [update]);
+  }, []);
 
   const renderItem = ({ item }) => (
-    <AdminListComponent
+    <AdminDriverList
       driver={item[1].name}
       route={item[1].route}
       isRoute={item[1].route !== "none"}
       id={item[0]}
-      update={update}
-      setUpdate={setUpdate}
     />
   );
   return (

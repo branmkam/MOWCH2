@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import getToken from "./getToken.js";
 import getTokenFromDb from "./getTokenFromDb.js";
-import AdminListComponent from "./AdminListComponent.js";
+import AdminDriverList from "./AdminDriverList.js";
 
 export default function TokenDisplay() {
   // use UseEffect to use an async await function to get the snapshot of the database in an array
@@ -20,7 +20,6 @@ export default function TokenDisplay() {
     async function fetchInfo() {
       let response = await getToken();
       //let responseValues = Object.values(response); // turn into an array
-      console.log(response);
       setData(response);
     }
     fetchInfo();
