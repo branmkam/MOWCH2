@@ -11,7 +11,7 @@ export default async function getToken() {
   let serverURL =
     "https://" + server + "/fmi/data/vLatest/databases/" + file + "/sessions";
   //const token = Buffer.from(uname + ":" + pw, 'utf8').toString('base64');
-
+  console.log("running get token");
   const response = await axios.post(
     serverURL,
     {},
@@ -25,6 +25,8 @@ export default async function getToken() {
       },
     }
   );
+
+  console.log("new token", response.data.response.token);
 
   // Object.values(response.data);
   fireDb.ref("env/").set({
