@@ -32,19 +32,6 @@ export default function App() {
       <Stack.Navigator style={styles.container}>
         <Stack.Screen
           name="Contact"
-          component={Contact}
-          options={{
-            headerStyle: {
-              backgroundColor: "#1C5063",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Assign Driver"
           component={ListOfRecords}
           options={{
             headerStyle: {
@@ -56,6 +43,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen
           name="Assign Route"
           component={ListOfDrivers} //change back to drivers once testing is done
