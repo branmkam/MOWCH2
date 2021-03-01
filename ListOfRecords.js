@@ -4,8 +4,38 @@ import getRecords from "./getRecords.js";
 import getAllDrivers from "./getAllDrivers.js";
 import AdminRouteList from "./AdminRouteList.js";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
+import axios from "axios";
+
+
+
+
 
 export default function ListOfRecords() {
+
+
+  // async function getMapsAPI() {
+  //   //API STUFF
+  //   // NEWEST KEY: AIzaSyCgS6Izs_ZzEPwGI03XcwXOJXrPaDvzbyY
+  //   // todo enable billing...
+  //   const key = "AIzaSyCgS6Izs_ZzEPwGI03XcwXOJXrPaDvzbyY"; // key added on 1/2/2021
+  //   let URL = "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal";
+  //   let response_api = await axios.get(URL,
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization" : key,
+  //         "Access-Control-Allow-Origin": "*",
+  //       },
+  //     }
+  //   );
+
+  //   let response_apiValues = Object.values(response_api.data); // turn into an array
+  //   console.log(response_apiValues);  
+  // }
+
+  // getMapsAPI();
+
+
   // use UseEffect to use an async await function to get the snapshot of the database in an array
   const [data, setData] = useState([]);
   const [update, setUpdate] = useState(true);

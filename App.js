@@ -31,6 +31,19 @@ export default function App() {
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator style={styles.container}>
         <Stack.Screen
+            name="homepage to mess around with"
+            component={ListOfRecords} //edit this as needed
+            options={{
+              headerStyle: {
+                backgroundColor: "#1C5063",
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
+            }}
+          />
+        <Stack.Screen
           name="Contact"
           component={ListOfRecords}
           options={{
