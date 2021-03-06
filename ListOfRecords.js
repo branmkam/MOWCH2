@@ -6,13 +6,7 @@ import AdminRouteList from "./AdminRouteList.js";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import axios from "axios";
 
-
-
-
-
 export default function ListOfRecords() {
-
-
   // async function getMapsAPI() {
   //   //API STUFF
   //   // NEWEST KEY: AIzaSyCgS6Izs_ZzEPwGI03XcwXOJXrPaDvzbyY
@@ -30,11 +24,10 @@ export default function ListOfRecords() {
   //   );
 
   //   let response_apiValues = Object.values(response_api.data); // turn into an array
-  //   console.log(response_apiValues);  
+  //   console.log(response_apiValues);
   // }
 
   // getMapsAPI();
-
 
   // use UseEffect to use an async await function to get the snapshot of the database in an array
   const [data, setData] = useState([]);
@@ -49,7 +42,6 @@ export default function ListOfRecords() {
       let response2 = await getAllDrivers();
       setData(response);
       setRoutesAssigned(response2.map((driver) => driver[1].route));
-
       setDrivers(response2);
     }
     fetchInfo();
