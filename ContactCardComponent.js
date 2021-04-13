@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { faUserShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
+import { Linking } from "react-native";
 
 export default function ContactCardComponent({ name, email, phone }) {
   return (
@@ -15,7 +16,14 @@ export default function ContactCardComponent({ name, email, phone }) {
           <View>
             <Text style={styles.input_container_has_no_route}>{name}</Text>
             <Text style={styles.input_container_has_no_route}>{email}</Text>
-            <Text style={styles.input_container_has_no_route}>{phone}</Text>
+            <Text
+              onPress={() => {
+                Linking.openURL(`tel:${phone}`);
+              }}
+              style={styles.input_container_has_no_route}
+            >
+              {phone}
+            </Text>
           </View>
         </View>
       </View>

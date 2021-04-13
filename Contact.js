@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  FlatList,
+  Linking,
+} from "react-native";
 import ContactCardComponent from "./ContactCardComponent.js";
 
 export default function Contact() {
@@ -12,7 +19,7 @@ export default function Contact() {
     {
       name: "Rachael Bearman",
       email: "rachel.bearman@chcmow.org",
-      phone: "(123) 456 7891",
+      phone: 1234567891,
     },
   ];
   const renderItem = ({ item }) => (

@@ -121,7 +121,7 @@ export default function Home({ navigation }) {
           />
         </View>
         <View style={styles.container}>
-          <View style={styles.googleMaps2}>
+          <View style={styles.nextRoute}>
             <TouchableOpacity style={styles.start}>
               <Text style={styles.text}>FINISH</Text>
             </TouchableOpacity>
@@ -149,7 +149,7 @@ export default function Home({ navigation }) {
           />
         </View>
         <View style={styles.container}>
-          <View style={styles.googleMaps2}>
+          <View style={styles.nextRoute}>
             <TouchableOpacity style={styles.start} onPress={advanceToNextRoute}>
               <Text style={styles.text}>NEXT ADDRESS</Text>
             </TouchableOpacity>
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     marginBottom: "2%",
     marginTop: "2%",
   },
-  googleMaps2: {
+  nextRoute: {
     borderRadius: "25px",
     padding: "2%",
     backgroundColor: "#C2D82F",
