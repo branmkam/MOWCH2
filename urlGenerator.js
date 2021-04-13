@@ -3,7 +3,7 @@ const addresses = [
     "135 E Franklin Street, Chapel Hill, NC",
 ];
 
-function urlGenerator(address)
+export default function urlGenerator(address)
 {
     address = address.split(" ").join("+");
     return "https://www.google.com/maps/dir/Current+Location/" + address;
@@ -11,4 +11,4 @@ function urlGenerator(address)
 
 
 
-addresses.map(add => console.log(urlGenerator(add)));
+//addresses.map(add => console.log(urlGenerator(add)));

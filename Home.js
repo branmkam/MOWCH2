@@ -9,12 +9,14 @@ import {
   ScrollView,
   Text,
   FlatList,
+  Linking,
 } from "react-native";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import AddressHomePage from "./AddressHomePage";
 import HomeAddressComponent from "./HomeAddressComponent";
 import { fireAuth, fireDb } from "./firebase";
 import axios from "axios";
+import urlGenerator from './urlGenerator.js';
 
 export default function Home({ navigation }) {
   const [routeNumber, setRouteNumber] = useState(-1);
@@ -35,7 +37,7 @@ export default function Home({ navigation }) {
   const DATA = [
     {
       name: "Rachael Bearman",
-      address: "123 EaringdaleHHare St",
+      address: "135 E Franklin Street, Chapel Hill, NC",
     },
     {
       name: "John Doe",
@@ -68,8 +70,10 @@ export default function Home({ navigation }) {
   };
 
   const navigateToGoogleMaps = (e) => {
-    // GO TO GOOGLE MAPS
+    let supported = urlGenerator(DATA[routeNumber].address);
+    Linking.openURL(supported);
   };
+
   const renderItem = ({ item }) => (
     <HomeAddressComponent name={item.name} address={item.address} />
   );
