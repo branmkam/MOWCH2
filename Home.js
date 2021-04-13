@@ -107,24 +107,29 @@ export default function Home({ navigation }) {
     );
   } else if (routeNumber == DATA.length - 1) {
     return (
-      <SafeAreaView style={styles.container}>
-        <View>
-          <Button
-            title="Go To Google Maps"
-            color="#C2D82E"
-            width="100%"
-            height="100%"
-            onPress={navigateToGoogleMaps} // TODO: function declaration
-          />
+      <SafeAreaView style={styles.other_container}>
+        <View style={styles.container}>
+          <View style={styles.googleMaps}>
+            <TouchableOpacity
+              style={styles.start}
+              onPress={navigateToGoogleMaps}
+            >
+              <Text style={styles.text}>OPEN IN GOOGLE MAPS</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View>
+        <View style={styles.other_container}>
           <HomeAddressComponent
             name={DATA[routeNumber].name}
             address={DATA[routeNumber].address}
           />
         </View>
-        <View>
-          <Button title="Finish" color="#C2D82F" width="100%" height="100%" />
+        <View style={styles.container}>
+          <View style={styles.nextRoute}>
+            <TouchableOpacity style={styles.start}>
+              <Text style={styles.text}>FINISH</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -148,13 +153,11 @@ export default function Home({ navigation }) {
           />
         </View>
         <View style={styles.container}>
-          <Button
-            title="Next Route"
-            color="#C2D82F"
-            width="1000px"
-            height="1000px"
-            onPress={advanceToNextRoute}
-          />
+          <View style={styles.nextRoute}>
+            <TouchableOpacity style={styles.start} onPress={advanceToNextRoute}>
+              <Text style={styles.text}>NEXT ADDRESS</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -184,6 +187,13 @@ const styles = StyleSheet.create({
     borderRadius: "25px",
     padding: "2%",
     backgroundColor: "#00B7C4",
+    marginBottom: "2%",
+    marginTop: "2%",
+  },
+  nextRoute: {
+    borderRadius: "25px",
+    padding: "2%",
+    backgroundColor: "#C2D82F",
     marginBottom: "2%",
     marginTop: "2%",
   },
