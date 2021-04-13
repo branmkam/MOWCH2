@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   Button,
+  Image,
   SafeAreaView,
 } from "react-native";
 import { fireAuth, fireDb } from "./firebase";
@@ -54,7 +55,11 @@ export default function Signup2({ navigation }) {
 
   return (
     <SafeAreaView id="signup" style={styles.container}>
-      <Text> MOWCH Logo Here </Text>
+      <Image
+        style={{ width: 750, height: 270 }}
+        resizeMode="contain"
+        source={require("./assets/MOWOC_Logo_Dark.jpg")}
+      />
       <View>
         <TextInput
           id="signup-email"

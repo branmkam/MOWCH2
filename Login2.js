@@ -3,6 +3,7 @@ import {
   Text,
   StyleSheet,
   View,
+  Image,
   TextInput,
   Button,
   SafeAreaView,
@@ -43,7 +44,11 @@ export default function Login2({ navigation }) {
 
   return (
     <SafeAreaView id="login" style={styles.container}>
-      <Text> MOWCH Logo Here </Text>
+      <Image
+        style={{ width: 750, height: 270 }}
+        resizeMode="contain"
+        source={require("./assets/MOWOC_Logo_Dark.jpg")}
+      />
       <View>
         <TextInput
           id="login-email"
@@ -65,7 +70,7 @@ export default function Login2({ navigation }) {
         <Text
           id="login-forgot"
           style={styles.forgot_password}
-          onPress = {() => navigation.navigate("ForgotPassword")}
+          onPress={() => navigation.navigate("ForgotPassword")}
           // TODO navigate to forgot password page
         >
           Forgot Password?
@@ -146,7 +151,8 @@ const styles = StyleSheet.create({
     marginBottom: "1%",
   },
   logo: {
-    objectFit: "contain",
+    display: "flex",
+    flexDirection: "column",
   },
 
   dont_have_account: {

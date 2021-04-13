@@ -13,8 +13,8 @@ export default function HomeAddressComponent({ name, address }) {
             <FontAwesomeIcon icon={faUserShield} size={25} />
           </View>
           <View>
-            <Text style={styles.input_container_has_no_route}>{name}</Text>
-            <Text style={styles.input_container_has_no_route}>{address}</Text>
+            <Text style={styles.input_container_name}>{name}</Text>
+            <Text style={styles.input_container_address}>{address}</Text>
           </View>
         </View>
       </View>
@@ -40,5 +40,20 @@ const styles = StyleSheet.create({
   },
   logo_container: {
     paddingRight: "2%",
+  },
+
+  input_container_name: {
+    fontFamily: Montserrat_400Regular,
+    color: "black",
+    fontSize: "120%",
+    fontWeight: "bold",
+    weight: "100%",
+  },
+  input_container_address: {
+    fontFamily: Montserrat_400Regular,
+    color: "black",
+    fontSize: "120%",
+    fontWeight: "regular",
+    weight: "100%",
   },
 });
