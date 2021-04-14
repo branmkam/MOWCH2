@@ -74,6 +74,22 @@ function getAddresses(route) {
   return t;
 }
 
+export function getAddressArray(route) {
+  let rte = "rte.RCP_Recipients::";
+  return route.portalData["rte.RCP_Recipients"].map(
+  function (obj) {
+    let object = 
+    {
+      name :
+        `${obj[rte + "Name_First"]} ${obj[rte + "Name_Last"]}`,
+      address :
+        `${obj[rte + "Address_Street1"]}${(obj[rte + "Address_Street2"].length == 0 ? "" : ", ")}${obj[rte + "Address_Street2"]}, ${obj[rte + "Address_City"]}, NC`,
+    }
+    return object;
+  });
+};
+
+
 function findRoute(data, city, num) {
   let route = null;
   let routeName = (city ? "Chapel Hill" : "Hillsborough") + "-" + num;
