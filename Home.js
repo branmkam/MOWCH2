@@ -22,7 +22,7 @@ import getRecords from "./getRecords.js";
 
 export default function Home({ navigation }) {
   const [routeNumber, setRouteNumber] = useState(-1);
-  const [routeID, setRouteID] = useState(1);
+  const [routeID, setRouteID] = useState(-1);
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
@@ -112,16 +112,10 @@ export default function Home({ navigation }) {
           />
         </View>
         <View style={styles.other_container}>
-          <View // Start button
-            style={styles.start}
-          >
-            <Button
-              title="Start"
-              color="#C2D82F"
-              width="100%"
-              height="100%"
-              onPress={startRoute}
-            />
+          <View style={styles.startButton}>
+            <TouchableOpacity style={styles.start} onPress={startRoute}>
+              <Text style={styles.text}>START</Text>
+            </TouchableOpacity>
           </View>
           <FlatList data={DATA} renderItem={renderItem} />
         </View>
@@ -247,6 +241,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#C2D82F",
     marginBottom: "2%",
     marginTop: "2%",
+  },
+  startButton: {
+    borderRadius: "25px",
+    padding: "2%",
+    backgroundColor: "#C2D82F",
+    marginBottom: "4%",
+    marginTop: "4%",
   },
   text: {
     color: "white",
