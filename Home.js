@@ -17,37 +17,49 @@ import HomeAddressComponent from "./HomeAddressComponent";
 import { fireAuth, fireDb } from "./firebase";
 import axios from "axios";
 import urlGenerator from './urlGenerator.js';
+import {getAddressArray} from './ListofRoutes.js';
+import getRecords from "./getRecords.js";
 
 export default function Home({ navigation }) {
   const [routeNumber, setRouteNumber] = useState(-1);
+  const [routeID, setRouteID] = useState(1);
+  const [records, setRecords] = useState([]);
+
   useEffect(() => {
     async function fetchInfo() {
+
+      //route names/addresses from Dean's database - DO THIS FIRST
+      let response = await getRecords();
+      let responseValues = Object.values(response);
+      setRecords(responseValues);
+
+      //route number from our database
       let user = fireAuth.currentUser;
-      var routeRef = fireDb.ref("users/" + user.uid + "/routeNumber");
+      let routeRef = fireDb.ref("users/" + user.uid + "/routeNumber");
       routeRef.on("value", (snapshot) => {
         const data = snapshot.val();
         setRouteNumber(data);
+      });
+
+      let routeIdRef = fireDb.ref("users/" + user.uid + "/routeId");
+      routeIdRef.on("value", (snapshot) => {
+        const data2 = snapshot.val();
+        setRouteID(data2);
       });
     }
     fetchInfo();
     // TODO: this doesn't update the first time you change it, but it does change after every other time you assign a driver
   }, []);
 
-  // REPLACE WITH THE LIST OF ADDRESSES
-  const DATA = [
-    {
-      name: "Rachael Bearman",
-      address: "135 E Franklin Street, Chapel Hill, NC",
-    },
-    {
-      name: "John Doe",
-      address: "124 Main St",
-    },
-    {
-      name: "John Doe",
-      address: "124 Main St",
-    },
-  ];
+  const findRoute = (routes, id) => {
+    return routes.find(ind => ind.fieldData.ID == id);
+  }
+
+  let dataList = findRoute(records, routeID);
+  console.log(dataList);
+  //REPLACE WITH THE LIST OF ADDRESSES
+  const DATA = (dataList == undefined) ? [] : getAddressArray(dataList);
+  console.log('DATA', DATA);
 
   const startRoute = (e) => {
     let user = fireAuth.currentUser;
