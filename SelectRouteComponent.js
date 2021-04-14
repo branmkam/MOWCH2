@@ -19,6 +19,7 @@ export default function SelectRouteComponent({
     fireDb.ref("users/").child(`${selectedDriver}`).update({
       route: routeName,
       routeId: routeId,
+      routeNumber: -1,
     });
     setStateR(true);
     setAssignedRoute(routeName);

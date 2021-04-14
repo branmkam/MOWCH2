@@ -13,11 +13,7 @@ export default function HomeAddressComponent({ name, address, completed }) {
             <FontAwesomeIcon icon={faUserShield} size={25} />
           </View>
           <View>
-            {!completed ? (
-              <Text style={styles.input_container_name}>{name}</Text>
-            ) : (
-              <Text style={styles.input_container_name_completed}>{name}</Text>
-            )}
+            <Text style={styles.input_container_name}>{name}</Text>
             <Text style={styles.input_container_address}>{address}</Text>
           </View>
         </View>

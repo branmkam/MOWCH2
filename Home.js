@@ -169,8 +169,9 @@ export default function Home({ navigation }) {
           <View style={styles.text_container}>
             <Text style={styles.text}>You're all done!</Text>
           </View>
-
-          <FlatList data={DATA} renderItem={renderItemFinished} />
+          <View style={styles.opact}>
+            <FlatList data={DATA} renderItem={renderItemFinished} />
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -212,6 +213,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+  opact: {
+    opacity: "50%",
+    color: "white",
+  },
   other_container: {
     display: "flex",
     flexDirection: "column",
@@ -249,7 +254,7 @@ const styles = StyleSheet.create({
     fontSize: "130%",
     fontWeight: "bold",
   },
-  text: {
+  text2: {
     color: "#00B7C4",
     fontFamily: Montserrat_400Regular,
     fontSize: "150%",
