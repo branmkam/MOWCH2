@@ -4,7 +4,7 @@ import { faUserShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 
-export default function HomeAddressComponent({ name, address }) {
+export default function HomeAddressComponent({ name, address, completed }) {
   return (
     <View style={styles.main_container}>
       <View>
@@ -13,7 +13,11 @@ export default function HomeAddressComponent({ name, address }) {
             <FontAwesomeIcon icon={faUserShield} size={25} />
           </View>
           <View>
-            <Text style={styles.input_container_name}>{name}</Text>
+            {!completed ? (
+              <Text style={styles.input_container_name}>{name}</Text>
+            ) : (
+              <Text style={styles.input_container_name_completed}>{name}</Text>
+            )}
             <Text style={styles.input_container_address}>{address}</Text>
           </View>
         </View>
@@ -45,6 +49,13 @@ const styles = StyleSheet.create({
   input_container_name: {
     fontFamily: Montserrat_400Regular,
     color: "black",
+    fontSize: "120%",
+    fontWeight: "bold",
+    weight: "100%",
+  },
+  input_container_name_completed: {
+    fontFamily: Montserrat_400Regular,
+    color: "gray",
     fontSize: "120%",
     fontWeight: "bold",
     weight: "100%",

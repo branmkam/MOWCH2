@@ -16,7 +16,7 @@ import AddressHomePage from "./AddressHomePage";
 import HomeAddressComponent from "./HomeAddressComponent";
 import { fireAuth, fireDb } from "./firebase";
 import axios from "axios";
-import urlGenerator from './urlGenerator.js';
+import urlGenerator from "./urlGenerator.js";
 
 export default function Home({ navigation }) {
   const [routeNumber, setRouteNumber] = useState(-1);
@@ -75,7 +75,18 @@ export default function Home({ navigation }) {
   };
 
   const renderItem = ({ item }) => (
-    <HomeAddressComponent name={item.name} address={item.address} />
+    <HomeAddressComponent
+      name={item.name}
+      address={item.address}
+      completed={false}
+    />
+  );
+  const renderItemFinished = ({ item }) => (
+    <HomeAddressComponent
+      name={item.name}
+      address={item.address}
+      completed={true}
+    />
   );
 
   if (routeNumber == -1) {
@@ -126,10 +137,29 @@ export default function Home({ navigation }) {
         </View>
         <View style={styles.container}>
           <View style={styles.nextRoute}>
-            <TouchableOpacity style={styles.start}>
+            <TouchableOpacity style={styles.start} onPress={advanceToNextRoute}>
               <Text style={styles.text}>FINISH</Text>
             </TouchableOpacity>
           </View>
+        </View>
+      </SafeAreaView>
+    );
+  } else if (routeNumber == DATA.length) {
+    return (
+      <SafeAreaView style={styles.other_container}>
+        <View style={styles.container}>
+          <Image
+            style={{ width: 750, height: 270 }}
+            resizeMode="contain"
+            source={require("./assets/MOWOC_Logo_Dark.jpg")}
+          />
+        </View>
+        <View style={styles.other_container}>
+          <View style={styles.text_container}>
+            <Text style={styles.text}>You're all done!</Text>
+          </View>
+
+          <FlatList data={DATA} renderItem={renderItemFinished} />
         </View>
       </SafeAreaView>
     );
@@ -175,7 +205,12 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
   },
-
+  text_container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "4%",
+  },
   start: {
     display: "flex",
     alignItems: "center",
@@ -201,6 +236,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: Montserrat_400Regular,
     fontSize: "130%",
+    fontWeight: "bold",
+  },
+  text: {
+    color: "#00B7C4",
+    fontFamily: Montserrat_400Regular,
+    fontSize: "150%",
     fontWeight: "bold",
   },
 });
